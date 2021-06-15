@@ -11,8 +11,8 @@
 // }
 
 window.addEventListener("load", function() {
-   let form = document.querySelector("launchForm");
-   form.addEventListener("formSubmit", function(event) {
+   let form = document.querySelector("form");
+   form.addEventListener("submit", function(event) {
       event.preventDefault();
       let pilotInput = document.querySelector("input[name=pilotName]");
       let copilotInput = document.querySelector("input[name=copilotName]");
@@ -23,10 +23,27 @@ window.addEventListener("load", function() {
       // alert("pilotName: " + pilotInput.value);
       if (pilotInput.value === "" || copilotInput.value === "" || fuelLevelInput.value === "" || cargoMassInput.value === "" ) {
          alert("All fields are required!");
+         return;
       }
       if (isNaN(fuelLevelInput.value) === true || isNaN(cargoMassInput.value) === true) {
          alert("Input must be a number!")
+         return;
       }
+
+
+      let pilotName = document.getElementById("pilotStatus");
+      pilotName.innerHTML = `${pilotInput.value} is ready for launch.`;
+
+      let copilotName = document.getElementById("copilotStatus");
+      copilotName.innerHTML = `${copilotInput.value} is ready for launch.`;
+
+      if (fuelLevelInput.value < 10000) {
+         document.getElementById("faultyItems").style.visibility = "visible";
+         let fuelGiven = document.getElementById("fuelStatus");
+         fuelGiven.innerHTML = "There is not enough fuel for the journey.";
+      }
+
+
    });
 });
 
