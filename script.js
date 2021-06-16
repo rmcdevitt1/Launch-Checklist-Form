@@ -41,8 +41,23 @@ window.addEventListener("load", function() {
          document.getElementById("faultyItems").style.visibility = "visible";
          let fuelGiven = document.getElementById("fuelStatus");
          fuelGiven.innerHTML = "There is not enough fuel for the journey.";
+         document.getElementById("launchStatus").innerHTML = "Shuttle Not Ready For Launch";
+         document.getElementById("launchStatus").style.color = "red";
       }
 
+      if (cargoMassInput.value > 10000) {
+         document.getElementById("faultyItems").style.visibility = "visible";
+         let cargoGiven = document.getElementById("cargoStatus");
+         cargoGiven.innerHTML = "There is too much cargo mass for the shuttle to take off.";
+         document.getElementById("launchStatus").innerHTML = "Shuttle Not Ready For Launch";
+         document.getElementById("launchStatus").style.color = "red";
+      }
+
+      if (cargoMassInput.value < 10000 && fuelLevelInput.value > 10000) {
+         document.getElementById("faultyItems").style.visibility = "visible";
+         document.getElementById("launchStatus").innerHTML = "Shuttle Is Ready For Launch";
+         document.getElementById("launchStatus").style.color = "green";
+      }
 
    });
 });
